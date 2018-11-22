@@ -1,14 +1,32 @@
 const crypto = require('crypto');
 const fs = require('fs');
-const { algorithm, password } = require('./config/index.js');
+const chalk = require('chalk');
+const logger = require('./logger');
+const helper = require('./helper');
 
-const cipher = crypto.createCipher(algorithm, password);
+const { algorithm, extension } = require('./config.js');
 
-const input = fs.createReadStream('data/data_sample.pdf');
-const output = fs.createWriteStream('data/encrypted.locker');
+const encrypt = (source, destination, password) => {
+    // First check
+    if (helper.check(source, destination, password)) {
 
-input.pipe(cipher).pipe(output);
+        const cipher = crypto.createCipher(algorithm, password);
+        
+        const input = fs.createReadStream(source);
+        const output = fs.createWriteStream(`d${destination}.${extension}`);
+        
+        input.pipe(cipher).pipe(output);
 
-output.on('finish', () => {
-    console.log('Encrypted file written to disk!');
-});
+        output.on('error', (err) => {
+            logger.error(`Error: ${err.message}`);
+        });
+
+        output.on('finish', () => {
+            logger.success('Encrypted file written to disk!');
+        });
+    }
+}
+
+encrypt('data/data_sample.pdf', 'data/encrypted-1');
+
+module.exports = encrypt;
