@@ -1,0 +1,25 @@
+{
+  "name": "locker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddon-90/locker.git"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "crypto",
+    "lock"
+  ],
+  "author": "Diego Donaggio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ddon-90/locker/issues"
+  },
+  "homepage": "https://github.com/ddon-90/locker#readme"
+}
