@@ -19,13 +19,13 @@ const encrypt = (password, source, destination) => {
 
         input.on('error', (err) => {
             logger.newLine();
-            logger.error(`Error: ${err.message}`);
+            logger.error(err.message);
             logger.newLine();
         });
 
         output.on('error', (err) => {
             logger.newLine();
-            logger.error(`Error: ${err.message}`);
+            logger.error(err.message);
             logger.newLine();
         });
 
