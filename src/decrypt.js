@@ -17,9 +17,15 @@ const decrypt = (password, source, destination) => {
         
         input.pipe(decipher).pipe(output);
 
+        input.on('error', (err) => {
+            logger.newLine();
+            logger.error(err.message);
+            logger.newLine();
+        });
+
         output.on('error', (err) => {
             logger.newLine();
-            logger.error(`Error: ${err.message}`);
+            logger.error(err.message);
             logger.newLine();
         });
 

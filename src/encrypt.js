@@ -17,6 +17,12 @@ const encrypt = (password, source, destination) => {
         
         input.pipe(cipher).pipe(output);
 
+        input.on('error', (err) => {
+            logger.newLine();
+            logger.error(`Error: ${err.message}`);
+            logger.newLine();
+        });
+
         output.on('error', (err) => {
             logger.newLine();
             logger.error(`Error: ${err.message}`);
