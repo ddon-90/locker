@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/ddon-90/locker#readme",
   "dependencies": {
-    "chalk": "^2.4.1"
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0"
   }
 }

@@ -4,29 +4,31 @@ const chalk = require('chalk');
 const logger = require('./logger');
 const helper = require('./helper');
 
-const { algorithm, extension } = require('./config.js');
+const { algorithm } = require('./config.js');
 
-const encrypt = (source, destination, password) => {
+const encrypt = (password, source, destination) => {
     // First check
-    if (helper.check(source, destination, password)) {
+    if (helper.check(password, source, destination)) {
 
         const cipher = crypto.createCipher(algorithm, password);
         
         const input = fs.createReadStream(source);
-        const output = fs.createWriteStream(`d${destination}.${extension}`);
+        const output = fs.createWriteStream(destination);
         
         input.pipe(cipher).pipe(output);
 
         output.on('error', (err) => {
+            logger.newLine();
             logger.error(`Error: ${err.message}`);
+            logger.newLine();
         });
 
         output.on('finish', () => {
+            logger.newLine();
             logger.success('Encrypted file written to disk!');
+            logger.newLine();
         });
     }
 }
-
-encrypt('data/data_sample.pdf', 'data/encrypted-1');
 
 module.exports = encrypt;

@@ -1,31 +1,24 @@
 const chalk = require('chalk');
 
 class Logger {
-    
-    constructor() {
-        this.logs = [];
-    }
 
-    get count() {
-        return this.logs.length;
+    newLine() {
+        console.log();
     }
 
     log(message) {
-        const timestamp = new Date().toISOString();
-        this.logs.push({ timestamp, message });
-        console.log(`${timestamp} - ${message}`);
+        message = message ? message : '';
+        console.log(message);
     }
 
     success(message) {
-        const timestamp = new Date().toISOString();
-        this.logs.push({ timestamp, message });
-        console.log(chalk.green.bold(`${timestamp} - ${message}`));
+        message = message ? message : '';
+        console.log(chalk.green.bold(message));
     }
 
     error(message) {
-        const timestamp = new Date().toISOString();
-        this.logs.push({ timestamp, message });
-        console.log(chalk.red.bold(`${timestamp} - ${message}`));
+        message = message ? message : '';
+        console.log(chalk.red.bold(message));
     }
 }
 
